@@ -1,0 +1,16 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use App::GAWM;
+
+App::GAWM->run;
+
+=head1 OVERVIEW
+
+For help with App::GAWM, run "gawm help"
+
+=cut
+
+__END__
+
+perl -I lib/ script/gawm

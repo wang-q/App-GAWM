@@ -1,7 +1,7 @@
 {
    "abstract" : "It's new $module",
    "author" : [
-      "wang-q <wang-q@outlook.com>"
+      "Qiang Wang <wang-q@outlook.com>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Minilla/v3.0.7, CPAN::Meta::Converter version 2.150005",
@@ -42,7 +42,8 @@
       },
       "runtime" : {
          "requires" : {
-            "perl" : "5.008001"
+            "App::Cmd" : "0.330",
+            "perl" : "5.010001"
          }
       },
       "test" : {
@@ -52,7 +53,7 @@
       }
    },
    "release_status" : "unstable",
-   "version" : "0.01",
+   "version" : "0.0.1",
    "x_authority" : "cpan:WANGQ",
    "x_serialization_backend" : "JSON::PP version 2.27300"
 }

@@ -11,13 +11,13 @@ App::GAWM - It's new $module
 
 App::GAWM is ...
 
+# AUTHOR
+
+Qiang Wang &lt;wang-q@outlook.com>
+
 # LICENSE
 
-Copyright (C) wang-q.
+This software is copyright (c) 2017 by Qiang Wang.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
-
-# AUTHOR
-
-wang-q &lt;wang-q@outlook.com>
