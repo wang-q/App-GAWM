@@ -42,7 +42,11 @@
       },
       "runtime" : {
          "requires" : {
+            "AlignDB::IntSpan" : "v1.1.0",
             "App::Cmd" : "0.330",
+            "MCE" : "1.810",
+            "Path::Tiny" : "0.076",
+            "YAML::Syck" : "1.29",
             "perl" : "5.010001"
          }
       },
