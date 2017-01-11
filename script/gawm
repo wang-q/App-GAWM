@@ -14,3 +14,7 @@ For help with App::GAWM, run "gawm help"
 __END__
 
 perl -I lib/ script/gawm
+
+perl -I lib/ t/02-init.t
+
+perl -I lib/ script/gawm init
