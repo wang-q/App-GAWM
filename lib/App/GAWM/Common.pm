@@ -5,7 +5,9 @@ use autodie;
 
 use 5.010001;
 
-use Carp;
-
+use Carp qw();
+use IPC::Cmd;
+use Path::Tiny;
+use YAML::Syck qw();
 
 1;
