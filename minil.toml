@@ -1,6 +1,5 @@
 name = "App-GAWM"
-# badges = ["travis"]
+badges = ['travis', 'codecov', 'metacpan']
 authority="cpan:WANGQ"
 
 module_maker="ModuleBuildTiny"
-
