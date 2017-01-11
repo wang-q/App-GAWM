@@ -1,0 +1,6 @@
+name = "App-GAWM"
+# badges = ["travis"]
+authority="cpan:WANGQ"
+
+module_maker="ModuleBuildTiny"
+
