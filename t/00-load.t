@@ -3,9 +3,9 @@ use warnings;
 use Test::More;
 
 BEGIN {
-    use_ok('AlignDB::GAWM');
+    use_ok('App::GAWM');
 }
 
-diag("Testing AlignDB::GAWM $AlignDB::GAWM::VERSION");
+diag("Testing App::GAWM App::GAWM::VERSION");
 
 done_testing;
