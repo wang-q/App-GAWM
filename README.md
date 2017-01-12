@@ -1,11 +1,21 @@
 [![Build Status](https://travis-ci.org/wang-q/App-GAWM.svg?branch=master)](https://travis-ci.org/wang-q/App-GAWM) [![Coverage Status](http://codecov.io/github/wang-q/App-GAWM/coverage.svg?branch=master)](https://codecov.io/github/wang-q/App-GAWM?branch=master) [![MetaCPAN Release](https://badge.fury.io/pl/App-GAWM.svg)](https://metacpan.org/release/App-GAWM)
 # NAME
 
-App::GAWM - It's new $module
+App::GAWM - Genome Analyst with MongoDB
 
 # SYNOPSIS
 
-    use App::GAWM;
+    gawm <command> [-?h] [long options...]
+        -? -h --help    show help
+
+    Available commands:
+
+      commands: list the application's commands
+          help: display a command's help screen
+
+          init: check, drop (initiate), dump or restore MongoDB
+
+See `gawm commands` for usage information.
 
 # DESCRIPTION
 
