@@ -57,6 +57,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/wang-q/App-GAWM/issues"
+      },
+      "homepage" : "https://github.com/wang-q/App-GAWM",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/wang-q/App-GAWM.git",
+         "web" : "https://github.com/wang-q/App-GAWM"
+      }
+   },
    "version" : "0.0.1",
    "x_authority" : "cpan:WANGQ",
    "x_serialization_backend" : "JSON::PP version 2.27300"
