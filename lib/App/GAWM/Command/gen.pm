@@ -23,17 +23,17 @@ sub opt_spec {
         [ 'dir=s',    'file/dire of genome', ],
         [ 'size|s=s', 'chr.sizes', ],
         [ 'name|n=s', 'common name', ],
-        [ 'parallel=i', 'run in parallel mode', { default => 1 } ],
         [],
-        [ 'length=i', 'break genome into pieces',            { default => 500_000 } ],
-        [ 'fill=i',   'fill gaps smaller than this value',   { default => 50 } ],
-        [ 'min=i',    'skip pieces smaller than this value', { default => 5000 } ],
+        [ 'length=i',   'break genome into pieces',            { default => 500_000 } ],
+        [ 'fill=i',     'fill gaps smaller than this value',   { default => 50 } ],
+        [ 'min=i',      'skip pieces smaller than this value', { default => 5000 } ],
+        [ 'parallel=i', 'run in parallel mode',                { default => 1 } ],
         { show_defaults => 1, }
     );
 }
 
 sub usage_desc {
-    return "gawm gen <file or dir> [options]";
+    return "gawm gen --dir <file or dir> [options]";
 }
 
 sub description {
