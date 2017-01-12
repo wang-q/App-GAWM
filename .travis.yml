@@ -6,6 +6,7 @@ perl:
   - "5.16"
 services:
   - mongodb
+sudo: false
 install:
   - cpanm -nq --installdeps --with-develop .
 before_script:
