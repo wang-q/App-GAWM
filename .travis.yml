@@ -4,12 +4,13 @@ perl:
   - "5.20"
   - "5.18"
   - "5.16"
-  - "5.14"
-  - "5.12"
-  - "5.10"
+services:
+  - mongodb
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq mongodb-clients
 install:
   - cpanm -nq --installdeps --with-develop .
-sudo: false
 before_script:
   - cpanm --quiet --notest --skip-satisfied Devel::Cover Devel::Cover::Report::Codecov
 script:
