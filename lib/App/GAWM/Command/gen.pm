@@ -178,12 +178,12 @@ sub execute {
                     $ambiguous_set->add( $pos + 1 );
                 }
             }
-            printf "    Ambiguous region for %s:\n        %s\n", $chr_name, $ambiguous_set->runlist;
+            printf "Ambiguous region for %s:\n    %s\n", $chr_name, $ambiguous_set->runlist;
 
             my $valid_set = AlignDB::IntSpan->new("1-$chr_length");
             $valid_set->subtract($ambiguous_set);
             $valid_set = $valid_set->fill( $opt->{fill} - 1 );
-            printf "    Valid region for %s:\n        %s\n", $chr_name, $valid_set->runlist;
+            printf "Valid region for %s:\n    %s\n", $chr_name, $valid_set->runlist;
 
             my @regions;    # ([start, end], [start, end], ...)
             for my $set ( $valid_set->sets ) {

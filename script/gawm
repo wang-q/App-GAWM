@@ -25,4 +25,4 @@ perl -I lib/ script/gawm init restore --dir t/Atha
 perl -I lib/ script/gawm init dump --dir .
 
 perl -I lib/ script/gawm init drop
-perl -I lib/ script/gawm gen -n S288c --dir t/S288c
+perl -I lib/ script/gawm gen --dir t/S288c
