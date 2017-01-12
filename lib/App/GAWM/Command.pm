@@ -10,6 +10,7 @@ sub opt_spec {
         [ 'server=s', 'MongoDB server IP/Domain name', { default => "localhost" } ],
         [ 'port=i',   'MongoDB server IP/Domain name', { default => "27017" } ],
         [ 'db|d=s',   'MongoDB database name',         { default => "gawm" } ],
+        $class->options($app),
     );
 }
 
