@@ -9,7 +9,14 @@ use App::GAWM::Common;
 use constant abstract => 'check, drop (initiate), dump or restore MongoDB';
 
 sub opt_spec {
-    return ( [ "dir=s", "dump to/restore from directory" ], { show_defaults => 1, } );
+    return (
+        [ 'server=s', 'MongoDB server IP/Domain name', { default => "localhost" } ],
+        [ 'port=i',   'MongoDB server IP/Domain name', { default => "27017" } ],
+        [ 'db|d=s',   'MongoDB database name',         { default => "gawm" } ],
+        [],
+        [ "dir=s", "dump to/restore from directory" ],
+        { show_defaults => 1, }
+    );
 }
 
 sub usage_desc {
