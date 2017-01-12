@@ -4,6 +4,8 @@ requires 'AlignDB::IntSpan', '1.1.0';
 requires 'MCE', '1.810';
 requires 'Path::Tiny', '0.076';
 requires 'YAML::Syck', '1.29';
+requires 'App::RL::Common';
+requires 'App::Fasops::Common';
 
 requires 'perl', '5.010001';
 
