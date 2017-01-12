@@ -10,9 +10,9 @@ use constant abstract => 'check, drop (initiate), dump or restore MongoDB';
 
 sub opt_spec {
     return (
-        [ 'server=s', 'MongoDB server IP/Domain name', { default => "localhost" } ],
-        [ 'port=i',   'MongoDB server IP/Domain name', { default => "27017" } ],
-        [ 'db|d=s',   'MongoDB database name',         { default => "gawm" } ],
+        [ 'host=s', 'MongoDB server IP/Domain name', { default => "localhost" } ],
+        [ 'port=i', 'MongoDB server IP/Domain name', { default => "27017" } ],
+        [ 'db|d=s', 'MongoDB database name',         { default => "gawm" } ],
         [],
         [ "dir=s", "dump to/restore from directory" ],
         { show_defaults => 1, }
@@ -64,6 +64,36 @@ sub validate_args {
 sub execute {
     my ( $self, $opt, $args ) = @_;
 
+    my $prefix = sprintf "mongo %s --host %s --port %d", $opt->{db}, $opt->{host}, $opt->{port};
+
+    if ( $args->[0] eq "check" ) {
+        if ( IPC::Cmd::can_run("mongo") ) {
+            print "*OK*: find [mongo] in \$PATH\n";
+        }
+        else {
+            print "*Failed*: can't find [mongo] in \$PATH\n";
+            exit 1;
+        }
+
+        my $cmd = $prefix . qq{ --eval "print(db.getMongo());"};
+        if ( system($cmd) == 0 ) {
+            print "*OK*: successfully connect to [$prefix]\n";
+        }
+        else {
+            print "*Failed*: system [$cmd] failed\n";
+            exit 1;
+        }
+    }
+    elsif ( $args->[0] eq "drop" ) {
+        my $cmd = $prefix . qq{ --eval "db.dropDatabase();"};
+        if ( system($cmd) == 0 ) {
+            print "*OK*: system [$cmd]\n";
+        }
+        else {
+            print "*Failed*: system [$cmd]\n";
+            exit 1;
+        }
+    }
 }
 
 1;

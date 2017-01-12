@@ -7,6 +7,7 @@ use 5.010001;
 
 use Carp qw();
 use IPC::Cmd;
+use MongoDB;
 use Path::Tiny;
 use YAML::Syck qw();
 

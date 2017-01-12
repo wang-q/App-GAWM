@@ -18,3 +18,4 @@ perl -I lib/ script/gawm
 perl -I lib/ t/02-init.t
 
 perl -I lib/ script/gawm init
+perl -I lib/ script/gawm init check

@@ -17,4 +17,11 @@ like( $result->error, qr{\-\-dir}, 'need --dir' );
 $result = test_app( 'App::GAWM' => [qw(init dump --dir t/not_exists)] );
 like( $result->error, qr{doesn't exist}, 'not exists' );
 
+$result = test_app( 'App::GAWM' => [qw(init check)] );
+like( $result->stdout, qr{\*OK\*: find},       'check mongo in $PATH' );
+like( $result->stdout, qr{\*OK\*: successful}, 'connect mongodb' );
+
+$result = test_app( 'App::GAWM' => [qw(init drop)] );
+like( $result->stdout, qr{\*OK\*: system}, 'drop (initiate)' );
+
 done_testing();
