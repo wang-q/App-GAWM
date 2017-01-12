@@ -11,6 +11,7 @@ use Path::Tiny;
 use YAML::Syck qw();
 
 use AlignDB::Stopwatch;
+use AlignDB::Window;
 use App::RL::Common;
 use App::Fasops::Common;
 

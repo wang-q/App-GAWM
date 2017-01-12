@@ -54,8 +54,12 @@ sub validate_args {
     if ( !$opt->{file} ) {
         $self->usage_error("--file is needed");
     }
-    elsif ( !Path::Tiny::path( $opt->{dir} )->is_file ) {
-        $self->usage_error("The input file [$opt->{file}] doesn't exist.");
+    else {
+        for my $f ( @{ $opt->{file} } ) {
+            if ( !Path::Tiny::path($f)->is_file ) {
+                $self->usage_error("The input file [$opt->{file}] doesn't exist.");
+            }
+        }
     }
 
     if ( !$opt->{tag} ) {
@@ -197,7 +201,7 @@ sub execute {
 
             my @align_ofgs = $coll_ofg->find( { 'align._id' => $align->{_id} } )->all;
             if ( @align_ofgs == 0 ) {
-                warn "No ofgs in this align\n";
+                warn "    No ofgs in this align\n";
                 next;
             }
             printf "    Find %d ofgs in this align\n", scalar @align_ofgs;
@@ -277,14 +281,15 @@ sub execute {
     };
 
     {    # ofg
-        my $client = MongoDB::MongoClient->new(
+            #@type MongoDB::Database
+        my $db = MongoDB::MongoClient->new(
             host          => $opt->{host},
             port          => $opt->{port},
             query_timeout => -1,
-        );
+        )->get_database( $opt->{db} );
 
         #@type MongoDB::Collection
-        my $coll = $client->ns("$opt->{db}.ofg");
+        my $coll = $db->get_collection("ofg");
         $coll->drop;
 
         my @jobs;
@@ -304,7 +309,7 @@ sub execute {
         $indexes->create_one( [ tag         => 1 ] );
         $indexes->create_one( [ type        => 1 ] );
 
-        $stopwatch->block_message( check_coll( $opt->{db}, "ofg", '_id' ) );
+        $stopwatch->block_message( App::GAWM::Common::check_coll( $db, "ofg", '_id' ) );
     }
 
     {    # ofgsw
@@ -338,7 +343,7 @@ sub execute {
         $indexes->create_one( { 'ofg.tag'  => 1 } );
         $indexes->create_one( { 'ofg.type' => 1 } );
 
-        $stopwatch->block_message( check_coll( $db, 'ofgsw', '_id' ) );
+        $stopwatch->block_message( App::GAWM::Common::check_coll( $db, 'ofgsw', '_id' ) );
     }
 
     $stopwatch->end_message( "All files have been processed.", "duration" );
