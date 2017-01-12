@@ -43,6 +43,7 @@
       "runtime" : {
          "requires" : {
             "AlignDB::IntSpan" : "v1.1.0",
+            "AlignDB::Stopwatch" : "0",
             "App::Cmd" : "0.330",
             "App::Fasops::Common" : "0",
             "App::RL::Common" : "0",
@@ -71,7 +72,7 @@
          "web" : "https://github.com/wang-q/App-GAWM"
       }
    },
-   "version" : "0.0.1",
+   "version" : "0.0.2",
    "x_authority" : "cpan:WANGQ",
    "x_serialization_backend" : "JSON::PP version 2.27300"
 }
