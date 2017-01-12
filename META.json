@@ -44,6 +44,8 @@
          "requires" : {
             "AlignDB::IntSpan" : "v1.1.0",
             "App::Cmd" : "0.330",
+            "App::Fasops::Common" : "0",
+            "App::RL::Common" : "0",
             "MCE" : "1.810",
             "MongoDB" : "v1.2.1",
             "Path::Tiny" : "0.076",

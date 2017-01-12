@@ -16,10 +16,12 @@ use constant abstract => 'generate database from fasta files';
 
 sub opt_spec {
     return (
-        [ 'host=s',     'MongoDB server IP/Domain name', { default => "localhost" } ],
-        [ 'port=i',     'MongoDB server IP/Domain name', { default => "27017" } ],
-        [ 'db|d=s',     'MongoDB database name',         { default => "gawm" } ],
-        [ 'parallel=i', 'run in parallel mode',          { default => 1 } ],
+        [ 'host=s', 'MongoDB server IP/Domain name', { default => "localhost" } ],
+        [ 'port=i', 'MongoDB server IP/Domain name', { default => "27017" } ],
+        [ 'db|d=s', 'MongoDB database name',         { default => "gawm" } ],
+        [],
+        [ 'dir=s', 'file/dire of genome', ],
+        [ 'parallel=i', 'run in parallel mode', { default => 1 } ],
         [],
         [ 'size|s=s', 'chr.sizes', ],
         [ 'name|n=s', 'common name', ],
@@ -43,37 +45,44 @@ sub description {
 sub validate_args {
     my ( $self, $opt, $args ) = @_;
 
-    if ( @{$args} != 1 ) {
-        my $message = "This command need one input file or directory.\n\tIt found";
+    if ( @{$args} != 0 ) {
+        my $message = "This command need no inputs. Pass genome files by --dir. \n\tIt found";
         $message .= sprintf " [%s]", $_ for @{$args};
         $message .= ".\n";
         $self->usage_error($message);
     }
 
-    if ( Path::Tiny::path( $args->[0] )->is_file ) {    # OK
+    if ( !$opt->{dir} ) {
+        $self->usage_error("--dir is needed\n");
     }
-    elsif ( Path::Tiny::path( $args->[0] )->is_dir ) {
-        my @paths = Path::Tiny::path( $args->[0] )->children(qr/\.fa[sta].*?$/);
+    elsif ( Path::Tiny::path( $opt->{dir} )->is_file ) {
+
+        # to array ref
+        $opt->{dir} = [ $opt->{dir} ];
+    }
+    elsif ( Path::Tiny::path( $opt->{dir} )->is_dir ) {
+        my @paths = Path::Tiny::path( $opt->{dir} )->children(qr/\.(fa|fas|fasta)$/);
         if ( !@paths ) {
-            $self->usage_error("Can't find .fa[ast] files in [$args->[0]]\n");
+            $self->usage_error("Can't find .fa[ast] files in [$opt->{dir}]\n");
         }
 
         # replace dir with files
-        $args = [ map { $_->stringify } @paths ];
+        $opt->{dir} = [ map { $_->stringify } @paths ];
     }
     else {
-        $self->usage_error("[$args->[0]] doesn't exist\n");
+        $self->usage_error("[$opt->{dir}] doesn't exist\n");
     }
 
     if ( !$opt->{name} ) {
-        $opt->{name} = Path::Tiny::path( $args->[0] )->basename;
+        $opt->{name} = Path::Tiny::path( $opt->{dir}[0] )->basename;
         $opt->{name} = s/\.fa[sta].*?$//;
     }
 
     if ( !$opt->{size} ) {
-        if ( Path::Tiny::path( $args->[0] )->parent->child('chr.sizes')->is_file ) {
+        if ( Path::Tiny::path( $opt->{dir}[0] )->parent->child('chr.sizes')->is_file ) {
             $opt->{size}
-                = Path::Tiny::path( $args->[0] )->parent->child('chr.sizes')->absolute->stringify;
+                = Path::Tiny::path( $opt->{dir}[0] )->parent->child('chr.sizes')
+                ->absolute->stringify;
             print "--size set to $opt->{size}\n";
         }
         else {
@@ -231,8 +240,9 @@ sub execute {
     #----------------------------#
     # start
     #----------------------------#
+    printf "Processing [@{[ scalar(@{$opt->{dir}}) ]}] fasta files\n";
     my $mce = MCE->new( max_workers => $opt->{parallel}, );
-    $mce->foreach( $args, $worker, );    # foreach implies chunk_size => 1.
+    $mce->foreach( $opt->{dir}, $worker, );    # foreach implies chunk_size => 1.
 
     #----------------------------#
     # index and check
@@ -266,7 +276,6 @@ sub execute {
     }
 
     $stopwatch->end_message( "All files have been processed.", "duration" );
-
 }
 
 1;
