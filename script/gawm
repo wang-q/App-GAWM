@@ -19,3 +19,7 @@ perl -I lib/ t/02-init.t
 
 perl -I lib/ script/gawm init
 perl -I lib/ script/gawm init check
+perl -I lib/ script/gawm init drop
+#mongorestore t/Atha --db gawm
+perl -I lib/ script/gawm init restore --dir t/Atha
+perl -I lib/ script/gawm init dump --dir .

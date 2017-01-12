@@ -64,7 +64,7 @@ sub validate_args {
 sub execute {
     my ( $self, $opt, $args ) = @_;
 
-    my $prefix = sprintf "mongo %s --host %s --port %d", $opt->{db}, $opt->{host}, $opt->{port};
+    my $server = sprintf "--host %s --port %d", $opt->{host}, $opt->{port};
 
     if ( $args->[0] eq "check" ) {
         if ( IPC::Cmd::can_run("mongo") ) {
@@ -75,9 +75,9 @@ sub execute {
             exit 1;
         }
 
-        my $cmd = $prefix . qq{ --eval "print(db.getMongo());"};
+        my $cmd = qq{mongo $opt->{db} $server --eval "print(db.getMongo());"};
         if ( system($cmd) == 0 ) {
-            print "*OK*: successfully connect to [$prefix]\n";
+            print "*OK*: successfully connect to [$server]\n";
         }
         else {
             print "*Failed*: system [$cmd] failed\n";
@@ -85,7 +85,28 @@ sub execute {
         }
     }
     elsif ( $args->[0] eq "drop" ) {
-        my $cmd = $prefix . qq{ --eval "db.dropDatabase();"};
+        my $cmd = qq{mongo $opt->{db} $server --eval "db.dropDatabase();"};
+        if ( system($cmd) == 0 ) {
+            print "*OK*: system [$cmd]\n";
+        }
+        else {
+            print "*Failed*: system [$cmd]\n";
+            exit 1;
+        }
+    }
+    elsif ( $args->[0] eq "dump" ) {
+        my $cmd = qq{mongodump $server --db $opt->{db} --out $opt->{dir}};
+        if ( system($cmd) == 0 ) {
+            print "*OK*: system [$cmd]\n";
+        }
+        else {
+            print "*Failed*: system [$cmd]\n";
+            exit 1;
+        }
+    }
+    elsif ( $args->[0] eq "restore" ) {
+        my $cmd = qq{mongorestore $opt->{dir} $server --db $opt->{db}};
+        print "Run [$cmd]\n";
         if ( system($cmd) == 0 ) {
             print "*OK*: system [$cmd]\n";
         }
