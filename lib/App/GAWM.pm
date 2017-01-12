@@ -14,11 +14,21 @@ __END__
 
 =head1 NAME
 
-App::GAWM - It's new $module
+App::GAWM - Genome Analyst with MongoDB
 
 =head1 SYNOPSIS
 
-    use App::GAWM;
+    gawm <command> [-?h] [long options...]
+    	-? -h --help    show help
+
+    Available commands:
+
+      commands: list the application's commands
+          help: display a command's help screen
+
+          init: check, drop (initiate), dump or restore MongoDB
+
+See C<gawm commands> for usage information.
 
 =head1 DESCRIPTION
 
