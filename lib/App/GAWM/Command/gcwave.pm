@@ -448,7 +448,7 @@ sub insert_gsw {
                 };
 
                 # pre allocate
-                $gsw->{bed_count} = 0;
+                $gsw->{pos_count} = 0;
                 my $gsw_seq = substr $align->{seq}, $gsw->{set}->min - 1, $gsw->{length};
                 $gsw->{gc} = {
                     gc => App::Fasops::Common::calc_gc_ratio( [$gsw_seq] ),

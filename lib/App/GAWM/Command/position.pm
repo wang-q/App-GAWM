@@ -12,7 +12,7 @@ use MongoDB::OID;
 
 use MCE;
 
-use constant abstract => 'generate database from fasta files';
+use constant abstract => 'add position files to ofg and generate ofgsw';
 
 sub opt_spec {
     return (
@@ -72,6 +72,7 @@ sub validate_args {
 
     if ( @{ $opt->{file} } != @{ $opt->{tag} } or @{ $opt->{file} } != @{ $opt->{type} } ) {
 
+        # TODO
     }
 }
 
@@ -264,7 +265,7 @@ sub execute {
                         $ofgsw->{align}{end} )->runlist;
 
                     # pre allocate
-                    $ofgsw->{bed_count} = 0;
+                    $ofgsw->{pos_count} = 0;
                     my $ofgsw_seq = substr $align->{seq}, $rsw->{set}->min - 1, $ofgsw->{length};
                     $ofgsw->{gc} = {
                         gc => App::Fasops::Common::calc_gc_ratio( [$ofgsw_seq] ),
