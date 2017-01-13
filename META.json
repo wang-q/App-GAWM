@@ -42,6 +42,7 @@
       },
       "runtime" : {
          "requires" : {
+            "AlignDB::GC" : "0",
             "AlignDB::IntSpan" : "v1.1.0",
             "AlignDB::Stopwatch" : "0",
             "AlignDB::Window" : "0",

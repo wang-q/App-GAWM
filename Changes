@@ -1,6 +1,9 @@
 Revision history for Perl extension App-GAWM
 
 {{$NEXT}}
+    - `gawm position`
+    - `gawm gcwave`
+    - `gawm swcv`
 
 0.0.2 2017-01-12T17:58:00Z
     - `gawm gen` works

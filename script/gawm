@@ -28,8 +28,8 @@ perl -I lib/ script/gawm init drop
 perl -I lib/ script/gawm gen --dir t/S288c
 perl -I lib/ script/gawm position --file t/spo11_hot.pos.txt --tag spo11 --type hot
 
-
 perl -I lib/ script/gawm init drop
 perl -I lib/ script/gawm gen --dir t/S288c
 perl -I lib/ script/gawm gcwave
+perl -I lib/ script/gawm swcv
 
