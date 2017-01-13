@@ -45,6 +45,7 @@
             "AlignDB::GC" : "0",
             "AlignDB::IntSpan" : "v1.1.0",
             "AlignDB::Stopwatch" : "0",
+            "AlignDB::ToXLSX" : "0",
             "AlignDB::Window" : "0",
             "App::Cmd" : "0.330",
             "App::Fasops::Common" : "0",

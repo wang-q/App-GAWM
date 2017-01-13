@@ -8,6 +8,7 @@ requires 'AlignDB::IntSpan', '1.1.0';
 requires 'AlignDB::GC';
 requires 'AlignDB::Stopwatch';
 requires 'AlignDB::Window';
+requires 'AlignDB::ToXLSX';
 requires 'App::RL::Common';
 requires 'App::Fasops::Common';
 
