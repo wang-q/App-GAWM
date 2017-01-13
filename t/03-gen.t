@@ -17,6 +17,7 @@ like( $result->error, qr{\-\-dir}, 'need --dir' );
 $result = test_app( 'App::GAWM' => [qw(gen --dir t/not_exists)] );
 like( $result->error, qr{doesn't exist}, 'not exists' );
 
+test_app( 'App::GAWM' => [qw(init drop)] );
 $result = test_app( 'App::GAWM' => [qw(gen --dir t/S288c)] );
 like( $result->stdout, qr{size set to},    'got chr.sizes from directory' );
 like( $result->stdout, qr{Processing \[2\]}, 'got fasta files from directory' );
