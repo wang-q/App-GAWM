@@ -550,11 +550,14 @@ sub get_tts {
     #@type MongoDB::Collection
     my $coll = $db->get_collection('ofg');
 
-    my $result
-        = $coll->aggregate( [ { '$group' => { "_id" => { type => '$type', tag => '$tag' } } } ] );
+    my @results
+        = $coll->aggregate( [ { '$group' => { "_id" => { type => '$type', tag => '$tag' } } } ] )
+        ->all;
+
+#    print YAML::Syck::Dump \@results;
 
     my @values;
-    for ( @{$result} ) {
+    for (@results) {
         my $hash_ref = $_->{_id};
         push @values, $hash_ref->{tag} . '-' . $hash_ref->{type};
     }

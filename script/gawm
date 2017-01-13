@@ -46,4 +46,4 @@ perl -I lib/ script/gawm gcwave
 perl -I lib/ script/gawm count insert --file t/spo11_hot.pos.txt
 perl -I lib/ script/gawm count count
 perl -I lib/ script/gawm swcv
-perl -I lib/ script/gawm stat --index --chart
+perl -I lib/ script/gawm stat --index --chart --by tt --replace POS=HotSpots
