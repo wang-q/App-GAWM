@@ -30,6 +30,8 @@ MYMETA.*
 
 /App-GAWM-*
 
+*.xlsx
+
 # IDE
 .idea
 .komodotools

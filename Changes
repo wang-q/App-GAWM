@@ -1,6 +1,7 @@
 Revision history for Perl extension App-GAWM
 
 {{$NEXT}}
+    - `gawm stat`
 
 0.0.3 2017-01-13T13:55:09Z
     - `gawm position`
