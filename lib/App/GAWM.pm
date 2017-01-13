@@ -19,14 +19,20 @@ App::GAWM - Genome Analyst with MongoDB
 =head1 SYNOPSIS
 
     gawm <command> [-?h] [long options...]
-    	-? -h --help    show help
+        -? -h --help    show help
 
     Available commands:
 
       commands: list the application's commands
           help: display a command's help screen
 
+         count: add position files and count intersections
+        gcwave: add GC ralated tables
+           gen: generate database from fasta files
           init: check, drop (initiate), dump or restore MongoDB
+      position: add position files to ofg and generate ofgsw
+          stat: do stats on gawm databases
+          swcv: update CV for ofgsw and gsw
 
 See C<gawm commands> for usage information.
 
