@@ -74,7 +74,7 @@
          "web" : "https://github.com/wang-q/App-GAWM"
       }
    },
-   "version" : "0.0.2",
+   "version" : "0.0.3",
    "x_authority" : "cpan:WANGQ",
    "x_serialization_backend" : "JSON::PP version 2.27300"
 }
