@@ -8,6 +8,9 @@ use App::GAWM;
 my $result = test_app( 'App::GAWM' => [qw(help gcwave)] );
 like( $result->stdout, qr{gcwave}, 'descriptions' );
 
+$result = test_app( 'App::GAWM' => [qw(gcwave t/not_exists)] );
+like( $result->error, qr{need no inputs}, 'need no inputs' );
+
 test_app( 'App::GAWM' => [qw(init drop)] );
 test_app( 'App::GAWM' => [qw(gen --dir t/S288c)] );
 $result = test_app( 'App::GAWM' => [qw(gcwave)] );
