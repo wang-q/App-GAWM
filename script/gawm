@@ -33,3 +33,8 @@ perl -I lib/ script/gawm gen --dir t/S288c
 perl -I lib/ script/gawm gcwave
 perl -I lib/ script/gawm swcv
 
+perl -I lib/ script/gawm init drop
+perl -I lib/ script/gawm gen --dir t/S288c
+perl -I lib/ script/gawm gcwave
+perl -I lib/ script/gawm count insert --file t/spo11_hot.pos.txt
+perl -I lib/ script/gawm count count
