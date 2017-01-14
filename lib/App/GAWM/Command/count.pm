@@ -20,7 +20,7 @@ sub opt_spec {
         [ 'port=i', 'MongoDB server IP/Domain name', { default => "27017" } ],
         [ 'db|d=s', 'MongoDB database name',         { default => "gawm" } ],
         [],
-        [ 'file=s@', 'position files', ],
+        [ 'file|f=s@', 'position files', ],
         [],
         [ 'parallel=i', 'run in parallel mode',                  { default => 1 } ],
         [ 'batch=i',    'aligns processed in one child process', { default => 10 } ],
