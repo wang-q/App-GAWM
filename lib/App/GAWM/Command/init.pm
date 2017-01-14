@@ -64,6 +64,9 @@ sub validate_args {
 sub execute {
     my ( $self, $opt, $args ) = @_;
 
+    my $stopwatch = AlignDB::Stopwatch->new;
+    $stopwatch->start_message();
+
     my $server = sprintf "--host %s --port %d", $opt->{host}, $opt->{port};
 
     if ( $args->[0] eq "check" ) {
@@ -115,6 +118,8 @@ sub execute {
             exit 1;
         }
     }
+
+    $stopwatch->end_message();
 }
 
 1;
