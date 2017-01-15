@@ -124,6 +124,23 @@ unset GAWM_PARALLEL
     |        |  count   |  1'58'' |  1'9'' |  1'11'' |
     |        |   stat   |    10'' |   10'' |     9'' |
 
+* disk usages
+
+    * mac
+        ```
+        $ du -hs ~/share/mongodb*
+        1.9G	/Users/wangq/share/mongodb
+         11G	/Users/wangq/share/mongodb26
+        1.9G	/Users/wangq/share/mongodb30
+        ```
+    * Ubuntu
+        ```
+        $ du -hs ~/share/mongodb*
+        1.7G    /home/wangq/share/mongodb
+        11G     /home/wangq/share/mongodb26
+        1.7G    /home/wangq/share/mongodb30
+        ```
+
 * different number of threads, MongoDB 3.4.1
     * macOS: 4
     * Ubuntu: 4, 8, 12, and 16
