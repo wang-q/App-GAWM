@@ -17,7 +17,7 @@ use constant abstract => 'add position files and count intersections';
 sub opt_spec {
     return (
         [ 'host=s', 'MongoDB server IP/Domain name', { default => "localhost" } ],
-        [ 'port=i', 'MongoDB server IP/Domain name', { default => "27017" } ],
+        [ 'port=i', 'MongoDB server port',           { default => "27017" } ],
         [ 'db|d=s', 'MongoDB database name',         { default => "gawm" } ],
         [],
         [ 'file|f=s@', 'position files', ],
@@ -339,4 +339,5 @@ sub count_pos_in_sw {
 
     return $count;
 }
+
 1;

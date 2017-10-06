@@ -17,7 +17,7 @@ use constant abstract => 'do stats on gawm databases';
 sub opt_spec {
     return (
         [ 'host=s', 'MongoDB server IP/Domain name', { default => "localhost" } ],
-        [ 'port=i', 'MongoDB server IP/Domain name', { default => "27017" } ],
+        [ 'port=i', 'MongoDB server port',           { default => "27017" } ],
         [ 'db|d=s', 'MongoDB database name',         { default => "gawm" } ],
         [],
         [ 'outfile|o=s', 'output filename', ],
@@ -554,7 +554,7 @@ sub get_tts {
         = $coll->aggregate( [ { '$group' => { "_id" => { type => '$type', tag => '$tag' } } } ] )
         ->all;
 
-#    print YAML::Syck::Dump \@results;
+    #    print YAML::Syck::Dump \@results;
 
     my @values;
     for (@results) {

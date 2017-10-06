@@ -17,7 +17,7 @@ use constant abstract => 'generate database from fasta files';
 sub opt_spec {
     return (
         [ 'host=s', 'MongoDB server IP/Domain name', { default => "localhost" } ],
-        [ 'port=i', 'MongoDB server IP/Domain name', { default => "27017" } ],
+        [ 'port=i', 'MongoDB server port',           { default => "27017" } ],
         [ 'db|d=s', 'MongoDB database name',         { default => "gawm" } ],
         [],
         [ 'dir=s',    'file/dire of genome', ],
