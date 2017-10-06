@@ -26,7 +26,7 @@ MongoDB 3.0.7 has a bug on `mongorestore`. Don't use this version.
 
 ```bash
 # need a working MongoDB to pass tests
-cpanm --mirror-only --mirror https://stratopan.com/wangq/ega/master App::GAWM
+cpanm https://github.com/wang-q/App-GAWM.git
 
 mkdir -p ~/data/dumps/mongodb/
 
