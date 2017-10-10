@@ -25,15 +25,16 @@ sub check_coll {
     #@type MongoDB::Collection
     my $coll = $db->get_collection($name);
 
-    my $total      = $coll->find->count;
-    my $exists     = $coll->find( { $field => { '$exists' => 1 } } )->count;
-    my $non_exists = $coll->find( { $field => { '$exists' => 0 } } )->count;
+    my $total      = $coll->count;
+    my $exists     = $coll->count( { $field => { '$exists' => 1 } } );
+    my $non_exists = $coll->count( { $field => { '$exists' => 0 } } );
 
     return "For collection [$name], check field [$field]:\n"
         . "    Total $total\n    Exists $exists\n    Non exists $non_exists\n";
 }
 
 sub process_message {
+
     #@type MongoDB::Database
     my $db       = shift;
     my $align_id = shift;
