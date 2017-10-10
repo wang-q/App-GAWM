@@ -186,7 +186,7 @@ sub execute {
             printf "Valid region for %s:\n    %s\n", $chr_name, $valid_set->runlist;
 
             my @regions;    # ([start, end], [start, end], ...)
-            for my $set ( $valid_set->sets ) {
+            for my AlignDB::IntSpan $set ( $valid_set->sets ) {
                 my $size = $set->size;
                 next if $size < $opt->{min};
 
@@ -258,7 +258,11 @@ sub execute {
         {
             my $name = "chr";
             $stopwatch->block_message("Indexing $name");
-            my $coll    = $db->get_collection($name);
+
+            #@type MongoDB::Collection
+            my $coll = $db->get_collection($name);
+
+            #@type MongoDB::IndexView
             my $indexes = $coll->indexes;
             $indexes->create_one( [ common_name => 1, name => 1 ], { unique => 1 } );
         }
@@ -266,7 +270,11 @@ sub execute {
         {
             my $name = "align";
             $stopwatch->block_message("Indexing $name");
-            my $coll    = $db->get_collection($name);
+
+            #@type MongoDB::Collection
+            my $coll = $db->get_collection($name);
+
+            #@type MongoDB::IndexView
             my $indexes = $coll->indexes;
             $indexes->create_one( [ "chr.name" => 1, "chr.start" => 1, "chr.end" => 1 ] );
         }
