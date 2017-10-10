@@ -139,7 +139,7 @@ sub execute {
     #----------------------------#
     # worker
     #----------------------------#
-    sub worker {
+    my $worker = sub {
         my ( $self, $chunk_ref, $chunk_id ) = @_;
         my $infile = $chunk_ref->[0];
         my $wid    = MCE->wid;
@@ -235,14 +235,14 @@ sub execute {
         $inner->block_message( "$infile has been processed.", "duration" );
 
         return;
-    }
+    };
 
     #----------------------------#
     # start
     #----------------------------#
     printf "Processing [@{[ scalar(@{$opt->{dir}}) ]}] fasta files\n";
     my $mce = MCE->new( max_workers => $opt->{parallel}, );
-    $mce->foreach( $opt->{dir}, \&worker, );    # foreach implies chunk_size => 1.
+    $mce->foreach( $opt->{dir}, $worker, );    # foreach implies chunk_size => 1.
 
     #----------------------------#
     # index and check
