@@ -302,7 +302,7 @@ sub count_pos_in_sw {
     my $align_id = shift;
     my $sw       = shift;
 
-    my $count = $coll->find(
+    my $count = $coll->count(
         {   'align._id' => $align_id,
             '$or'       => [
 
@@ -335,7 +335,7 @@ sub count_pos_in_sw {
                 },
             ]
         }
-    )->count;
+    );
 
     return $count;
 }
