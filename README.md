@@ -29,7 +29,7 @@ App::GAWM is ...
 
 # AUTHOR
 
-Qiang Wang &lt;wang-q@outlook.com>
+Qiang Wang <wang-q@outlook.com>
 
 # LICENSE
 
