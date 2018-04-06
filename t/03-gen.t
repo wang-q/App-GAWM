@@ -17,10 +17,17 @@ like( $result->error, qr{\-\-dir}, 'need --dir' );
 $result = test_app( 'App::GAWM' => [qw(gen --dir t/not_exists)] );
 like( $result->error, qr{doesn't exist}, 'not exists' );
 
-test_app( 'App::GAWM' => [qw(init drop)] );
-$result = test_app( 'App::GAWM' => [qw(gen --dir t/S288c)] );
-like( $result->stdout, qr{size set to},    'got chr.sizes from directory' );
-like( $result->stdout, qr{Processing \[2\]}, 'got fasta files from directory' );
-like( $result->stdout, qr{Exists 2},       'inserted' );
+SKIP: {
+    skip "MongoDB not installed", 3
+        unless IPC::Cmd::can_run('mongo')
+        or IPC::Cmd::can_run('mongodump')
+        or IPC::Cmd::can_run('mongorestore');
+
+    test_app( 'App::GAWM' => [qw(init drop)] );
+    $result = test_app( 'App::GAWM' => [qw(gen --dir t/S288c)] );
+    like( $result->stdout, qr{size set to},      'got chr.sizes from directory' );
+    like( $result->stdout, qr{Processing \[2\]}, 'got fasta files from directory' );
+    like( $result->stdout, qr{Exists 2},         'inserted' );
+}
 
 done_testing();

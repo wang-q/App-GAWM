@@ -11,12 +11,19 @@ like( $result->stdout, qr{swcv}, 'descriptions' );
 $result = test_app( 'App::GAWM' => [qw(swcv t/not_exists)] );
 like( $result->error, qr{need no inputs}, 'need no inputs' );
 
-test_app( 'App::GAWM' => [qw(init drop)] );
-test_app( 'App::GAWM' => [qw(gen --dir t/S288c)] );
-test_app( 'App::GAWM' => [qw(gcwave)] );
-$result = test_app( 'App::GAWM' => [qw(swcv)] );
-like( $result->stdout, qr{Update CV},   'start message' );
-like( $result->stdout, qr{Exists 0},    'not inserted' );
-like( $result->stdout, qr{Exists 3114}, 'gsw' );
+SKIP: {
+    skip "MongoDB not installed", 3
+        unless IPC::Cmd::can_run('mongo')
+        or IPC::Cmd::can_run('mongodump')
+        or IPC::Cmd::can_run('mongorestore');
+
+    test_app( 'App::GAWM' => [qw(init drop)] );
+    test_app( 'App::GAWM' => [qw(gen --dir t/S288c)] );
+    test_app( 'App::GAWM' => [qw(gcwave)] );
+    $result = test_app( 'App::GAWM' => [qw(swcv)] );
+    like( $result->stdout, qr{Update CV},   'start message' );
+    like( $result->stdout, qr{Exists 0},    'not inserted' );
+    like( $result->stdout, qr{Exists 3114}, 'gsw' );
+}
 
 done_testing();
