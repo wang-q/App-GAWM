@@ -3,16 +3,15 @@ use strict;
 use warnings;
 use autodie;
 
+use MongoDB;
+use MCE;
+
 use App::GAWM -command;
 use App::GAWM::Common;
 
-use MongoDB;
-$MongoDB::BSON::looks_like_number = 1;
-use MongoDB::OID;
-
-use MCE;
-
-use constant abstract => 'generate database from fasta files';
+sub abstract {
+    return 'generate database from fasta files';
+}
 
 sub opt_spec {
     return (

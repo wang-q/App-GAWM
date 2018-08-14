@@ -3,16 +3,15 @@ use strict;
 use warnings;
 use autodie;
 
+use MongoDB;
+use AlignDB::ToXLSX;
+
 use App::GAWM -command;
 use App::GAWM::Common;
 
-use MongoDB;
-$MongoDB::BSON::looks_like_number = 1;
-use MongoDB::OID;
-
-use AlignDB::ToXLSX;
-
-use constant abstract => 'do stats on gawm databases';
+sub abstract {
+    return 'do stats on gawm databases';
+}
 
 sub opt_spec {
     return (

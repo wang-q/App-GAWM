@@ -7,14 +7,13 @@ use App::GAWM -command;
 use App::GAWM::Common;
 
 use MongoDB;
-$MongoDB::BSON::looks_like_number = 1;
-use MongoDB::OID;
-
 use MCE;
 
 use AlignDB::GC;
 
-use constant abstract => 'add GC ralated tables';
+sub abstract {
+    return 'add GC ralated tables';
+}
 
 sub opt_spec {
     return (

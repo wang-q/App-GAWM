@@ -6,7 +6,9 @@ use autodie;
 use App::GAWM -command;
 use App::GAWM::Common;
 
-use constant abstract => 'check, drop (initiate), dump or restore MongoDB';
+sub abstract {
+    return 'check, drop (initiate), dump or restore MongoDB';
+}
 
 sub opt_spec {
     return (

@@ -3,16 +3,15 @@ use strict;
 use warnings;
 use autodie;
 
+use MongoDB;
+use MCE;
+
 use App::GAWM -command;
 use App::GAWM::Common;
 
-use MongoDB;
-$MongoDB::BSON::looks_like_number = 1;
-use MongoDB::OID;
-
-use MCE;
-
-use constant abstract => 'add position files to ofg and generate ofgsw';
+sub abstract {
+    return 'add position files to ofg and generate ofgsw';
+}
 
 sub opt_spec {
     return (
