@@ -3,16 +3,17 @@ use strict;
 use warnings;
 use autodie;
 
-use App::GAWM -command;
-use App::GAWM::Common;
-
 use MongoDB;
-$MongoDB::BSON::looks_like_number = 1;
-use MongoDB::OID;
+use BSON::OID;
 
 use MCE;
 
-use constant abstract => 'add position files and count intersections';
+use App::GAWM -command;
+use App::GAWM::Common;
+
+sub abstract {
+    return 'add position files and count intersections';
+}
 
 sub opt_spec {
     return (
@@ -35,9 +36,15 @@ sub usage_desc {
 sub description {
     my $desc;
     $desc .= ucfirst(abstract) . ".\n";
-    $desc .= "List of actions:\n";
-    $desc .= "\tinsert: add position files\n";
-    $desc .= "\tcount:  count intersections\n";
+    $desc .= <<'MARKDOWN';
+
+List of actions:
+
+* insert: add position files
+* count:  count intersections
+
+MARKDOWN
+
     return $desc;
 }
 
@@ -100,6 +107,7 @@ sub execute {
             host          => $opt->{host},
             port          => $opt->{port},
             query_timeout => -1,
+            bson_codec    => BSON->new( prefer_numeric => 1, ),
         )->get_database( $opt->{db} );
 
         #@type MongoDB::Collection
@@ -117,7 +125,7 @@ sub execute {
             my $align = $coll_align->find_one(
                 {   'chr.name'  => $info->{chr},
                     'chr.start' => { '$lte' => $info->{start} },
-                    'chr.end'   => { '$gte' => $info->{end} }
+                    'chr.end'   => { '$gte' => $info->{end} },
                 }
             );
 
@@ -141,6 +149,8 @@ sub execute {
 
         print "Inserting file [$file]\n";
 
+        # https://www.mongodb.com/blog/post/introducing-the-1-0-perl-driver
+        # BSON encoding and decoding
         #@type MongoDB::Collection
         my $coll_position = $db->get_collection('position');
         while ( scalar @positions ) {
@@ -165,6 +175,7 @@ sub execute {
             host          => $opt->{host},
             port          => $opt->{port},
             query_timeout => -1,
+            bson_codec    => BSON->new( prefer_numeric => 1, ),
         )->get_database( $opt->{db} );
 
         #@type MongoDB::Collection
@@ -236,14 +247,14 @@ sub execute {
 
             for my $key ( keys %gsw_count_of ) {
                 $coll_gsw->update_one(
-                    { _id    => MongoDB::OID->new( value => $key ) },
-                    { '$set' => { pos_count              => $gsw_count_of{$key}, } },
+                    { _id    => BSON::OID->new( oid => $key ) },
+                    { '$set' => { pos_count => $gsw_count_of{$key}, } },
                 );
             }
             for my $key ( keys %ofgsw_count_of ) {
                 $coll_ofgsw->update_one(
-                    { _id    => MongoDB::OID->new( value => $key ) },
-                    { '$set' => { pos_count              => $ofgsw_count_of{$key}, } },
+                    { _id    => BSON::OID->new( oid => $key ) },
+                    { '$set' => { pos_count => $ofgsw_count_of{$key}, } },
                 );
             }
         }
@@ -256,6 +267,7 @@ sub execute {
             host          => $opt->{host},
             port          => $opt->{port},
             query_timeout => -1,
+            bson_codec    => BSON->new( prefer_numeric => 1, ),
         )->get_database( $opt->{db} );
 
         #@type MongoDB::Collection
@@ -280,6 +292,7 @@ sub execute {
             host          => $opt->{host},
             port          => $opt->{port},
             query_timeout => -1,
+            bson_codec    => BSON->new( prefer_numeric => 1, ),
         )->get_database( $opt->{db} );
 
         my @aligns = $db->get_collection('align')->find->fields( { _id => 1 } )->all;

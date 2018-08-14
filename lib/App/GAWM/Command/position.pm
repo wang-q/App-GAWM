@@ -102,6 +102,7 @@ sub execute {
             host          => $opt->{host},
             port          => $opt->{port},
             query_timeout => -1,
+            bson_codec    => BSON->new( prefer_numeric => 1, ),
         )->get_database( $opt->{db} );
 
         #@type MongoDB::Collection
@@ -118,10 +119,11 @@ sub execute {
             $info->{tag}  = $tag;
             $info->{type} = $type;
 
+            # https://metacpan.org/pod/MongoDB::Collection#Ordered-document
             my $align = $coll_align->find_one(
-                {   'chr.name'  => $info->{chr},
+                {   'chr.name'  => { '$eq'  => $info->{chr} },
                     'chr.start' => { '$lte' => $info->{start} },
-                    'chr.end'   => { '$gte' => $info->{end} }
+                    'chr.end'   => { '$gte' => $info->{end} },
                 }
             );
             if ( !$align ) {
@@ -132,7 +134,7 @@ sub execute {
                 my $length          = $info->{end} - $info->{start} + 1;
                 my $ofg_align_start = $info->{start} - $align->{chr}{start} + 1;
                 my $ofg_align_end   = $info->{end} - $align->{chr}{start} + 1;
-                my $ofg_seq         = substr $align->{seq}, $ofg_align_start - 1, $length;
+                my $ofg_seq         = substr( $align->{seq}, $ofg_align_start - 1, $length );
                 my $ofg_gc          = App::Fasops::Common::calc_gc_ratio( [$ofg_seq] );
                 push @data,
                     {
@@ -267,7 +269,7 @@ sub execute {
                     $ofgsw->{pos_count} = 0;
                     my $ofgsw_seq = substr $align->{seq}, $rsw->{set}->min - 1, $ofgsw->{length};
                     $ofgsw->{gc} = {
-                        gc => App::Fasops::Common::calc_gc_ratio( [$ofgsw_seq] ),
+                        gc   => App::Fasops::Common::calc_gc_ratio( [$ofgsw_seq] ),
                         mean => 0.0,
                         cv   => 0.0,
                         std  => 0.0,

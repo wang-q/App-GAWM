@@ -104,6 +104,7 @@ sub execute {
             host          => $opt->{host},
             port          => $opt->{port},
             query_timeout => -1,
+            bson_codec    => BSON->new( prefer_numeric => 1, ),
         );
         $client->ns("$opt->{db}.chr")->drop;
         $client->ns("$opt->{db}.align")->drop;
@@ -114,6 +115,7 @@ sub execute {
             host          => $opt->{host},
             port          => $opt->{port},
             query_timeout => -1,
+            bson_codec    => BSON->new( prefer_numeric => 1, ),
         );
 
         #@type MongoDB::Collection
@@ -132,7 +134,8 @@ sub execute {
         $coll_chr->insert_many( \@chrs );
 
         $stopwatch->block_message(
-            "There are [@{[$coll_chr->estimated_document_count]}] documents in collection chromosome\n");
+            "There are [@{[$coll_chr->estimated_document_count]}] documents in collection chromosome\n"
+        );
     }
 
     #----------------------------#
@@ -152,6 +155,7 @@ sub execute {
             host          => $opt->{host},
             port          => $opt->{port},
             query_timeout => -1,
+            bson_codec    => BSON->new( prefer_numeric => 1, ),
         )->get_database( $opt->{db} );
 
         my $seq_of = App::Fasops::Common::read_fasta($infile);
@@ -252,6 +256,7 @@ sub execute {
             host          => $opt->{host},
             port          => $opt->{port},
             query_timeout => -1,
+            bson_codec    => BSON->new( prefer_numeric => 1, ),
         )->get_database( $opt->{db} );
 
         {
