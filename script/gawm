@@ -16,7 +16,6 @@ __END__
 perl -I lib/ script/gawm
 
 perl -I lib/ t/02-init.t
-
 perl -I lib/ script/gawm init
 perl -I lib/ script/gawm init check
 perl -I lib/ script/gawm init drop
@@ -24,15 +23,18 @@ perl -I lib/ script/gawm init drop
 perl -I lib/ script/gawm init restore --dir t/Atha
 perl -I lib/ script/gawm init dump --dir .
 
+perl -I lib/ t/04-position.t
 perl -I lib/ script/gawm init drop
 perl -I lib/ script/gawm gen --dir t/S288c
 perl -I lib/ script/gawm position --file t/spo11_hot.pos.txt --tag spo11 --type hot
 
+perl -I lib/ t/06-swcv.t
 perl -I lib/ script/gawm init drop
 perl -I lib/ script/gawm gen --dir t/S288c
 perl -I lib/ script/gawm gcwave
 perl -I lib/ script/gawm swcv
 
+perl -I lib/ t/07-count.t
 perl -I lib/ script/gawm init drop
 perl -I lib/ script/gawm gen --dir t/S288c
 perl -I lib/ script/gawm gcwave
