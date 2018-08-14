@@ -3,18 +3,18 @@ use strict;
 use warnings;
 use autodie;
 
-use App::GAWM -command;
-use App::GAWM::Common;
-
 use MongoDB;
-$MongoDB::BSON::looks_like_number = 1;
-use MongoDB::OID;
-
+use BSON::OID;
 use MCE;
 
 use AlignDB::GC;
 
-use constant abstract => 'update CV for ofgsw and gsw';
+use App::GAWM -command;
+use App::GAWM::Common;
+
+sub abstract {
+    return 'update CV for ofgsw and gsw';
+}
 
 sub opt_spec {
     return (
@@ -177,13 +177,13 @@ sub execute {
             # MongoDB::OID would be overloaded to string when as hash key
             for my $key ( keys %stat_ofgsw_of ) {
                 $coll_ofgsw->update_one(
-                    { _id    => MongoDB::OID->new( value => $key ) },
+                    { _id    => BSON::OID->new( oid => $key ) },
                     { '$set' => $stat_ofgsw_of{$key}, },
                 );
             }
             for my $key ( keys %stat_gsw_of ) {
                 $coll_gsw->update_one(
-                    { _id    => MongoDB::OID->new( value => $key ) },
+                    { _id    => BSON::OID->new( oid => $key ) },
                     { '$set' => $stat_gsw_of{$key}, },
                 );
             }
