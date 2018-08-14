@@ -75,7 +75,7 @@ sub validate_args {
 
     if ( !$opt->{name} ) {
         $opt->{name} = Path::Tiny::path( $opt->{dir}[0] )->basename;
-        $opt->{name} = s/\.fa[sta].*?$//;
+        $opt->{name} =~ s/\.fa[sta].*?$//;
     }
 
     if ( !$opt->{size} ) {
