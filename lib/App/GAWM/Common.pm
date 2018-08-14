@@ -7,6 +7,7 @@ use 5.010001;
 
 use Carp qw();
 use IPC::Cmd;
+use JSON qw();
 use Path::Tiny;
 use YAML::Syck qw();
 

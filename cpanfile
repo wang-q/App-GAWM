@@ -1,4 +1,5 @@
 requires 'App::Cmd',   '0.330';
+requires 'JSON',       '2.97001';
 requires 'MongoDB',    '2.0.1';
 requires 'MCE',        '1.810';
 requires 'Path::Tiny', '0.076';

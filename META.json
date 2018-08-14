@@ -50,6 +50,7 @@
             "App::Cmd" : "0.330",
             "App::Fasops::Common" : "0",
             "App::RL::Common" : "0",
+            "JSON" : "2.97001",
             "MCE" : "1.810",
             "MongoDB" : "v2.0.1",
             "Path::Tiny" : "0.076",
