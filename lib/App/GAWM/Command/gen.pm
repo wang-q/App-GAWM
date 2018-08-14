@@ -133,7 +133,7 @@ sub execute {
         $coll_chr->insert_many( \@chrs );
 
         $stopwatch->block_message(
-            "There are [@{[$coll_chr->count]}] documents in collection chromosome\n");
+            "There are [@{[$coll_chr->estimated_document_count]}] documents in collection chromosome\n");
     }
 
     #----------------------------#

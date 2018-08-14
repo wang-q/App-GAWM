@@ -25,9 +25,9 @@ sub check_coll {
     #@type MongoDB::Collection
     my $coll = $db->get_collection($name);
 
-    my $total      = $coll->count;
-    my $exists     = $coll->count( { $field => { '$exists' => 1 } } );
-    my $non_exists = $coll->count( { $field => { '$exists' => 0 } } );
+    my $total      = $coll->estimated_document_count;
+    my $exists     = $coll->count_documents( { $field => { '$exists' => 1 } } );
+    my $non_exists = $coll->count_documents( { $field => { '$exists' => 0 } } );
 
     return "For collection [$name], check field [$field]:\n"
         . "    Total $total\n    Exists $exists\n    Non exists $non_exists\n";
