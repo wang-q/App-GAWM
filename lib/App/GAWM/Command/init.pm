@@ -28,11 +28,17 @@ sub usage_desc {
 sub description {
     my $desc;
     $desc .= ucfirst(abstract) . ".\n";
-    $desc .= "List of actions:\n";
-    $desc .= "\tcheck:   a running MongoDB service and path/to/mongodb/bin in \$PATH\n";
-    $desc .= "\tdrop:    drops the database for accepting new data\n";
-    $desc .= "\tdump:    export of the contents of the database \n";
-    $desc .= "\trestore: restore a database from a binary database dump\n";
+    $desc .= <<'MARKDOWN';
+
+List of actions:
+
+* check:   a running MongoDB service and path/to/mongodb/bin in \$PATH
+* drop:    drops the database for accepting new data
+* dump:    export of the contents of the database
+* restore: restore a database from a binary database dump
+
+MARKDOWN
+
     return $desc;
 }
 
