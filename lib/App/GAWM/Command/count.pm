@@ -4,8 +4,6 @@ use warnings;
 use autodie;
 
 use MongoDB;
-use BSON::OID;
-
 use MCE;
 
 use App::GAWM -command;
@@ -247,13 +245,13 @@ sub execute {
 
             for my $key ( keys %gsw_count_of ) {
                 $coll_gsw->update_one(
-                    { _id    => BSON::OID->new( oid => $key ) },
+                    { _id    => $key },
                     { '$set' => { pos_count => $gsw_count_of{$key}, } },
                 );
             }
             for my $key ( keys %ofgsw_count_of ) {
                 $coll_ofgsw->update_one(
-                    { _id    => BSON::OID->new( oid => $key ) },
+                    { _id    => $key },
                     { '$set' => { pos_count => $ofgsw_count_of{$key}, } },
                 );
             }

@@ -166,7 +166,7 @@ sub execute {
             my $chr_seq    = $seq_of->{$chr_name};
             my $chr_length = length $chr_seq;
 
-            # find chromosome OID
+            # find chromosome
             #@type MongoDB::Collection
             my $coll_chr = $db->get_collection('chr');
             my $chr_id

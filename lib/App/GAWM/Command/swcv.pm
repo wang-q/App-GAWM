@@ -4,7 +4,6 @@ use warnings;
 use autodie;
 
 use MongoDB;
-use BSON::OID;
 use MCE;
 
 use AlignDB::GC;
@@ -174,18 +173,11 @@ sub execute {
             #----------------------------#
             # update
             #----------------------------#
-            # MongoDB::OID would be overloaded to string when as hash key
             for my $key ( keys %stat_ofgsw_of ) {
-                $coll_ofgsw->update_one(
-                    { _id    => BSON::OID->new( oid => $key ) },
-                    { '$set' => $stat_ofgsw_of{$key}, },
-                );
+                $coll_ofgsw->update_one( { _id => $key }, { '$set' => $stat_ofgsw_of{$key}, }, );
             }
             for my $key ( keys %stat_gsw_of ) {
-                $coll_gsw->update_one(
-                    { _id    => BSON::OID->new( oid => $key ) },
-                    { '$set' => $stat_gsw_of{$key}, },
-                );
+                $coll_gsw->update_one( { _id => $key }, { '$set' => $stat_gsw_of{$key}, }, );
             }
         }
     };
