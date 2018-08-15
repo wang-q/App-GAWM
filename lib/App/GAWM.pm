@@ -1,5 +1,5 @@
 package App::GAWM;
-use 5.010001;
+use 5.018001;
 use strict;
 use warnings;
 use App::Cmd::Setup -app;
