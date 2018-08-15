@@ -1,6 +1,13 @@
 Revision history for Perl extension App-GAWM
 
 {{$NEXT}}
+    - MongoDB 4.0.1
+    - MongoDB Perl Driver 2.0.1
+    - Perl 5.18
+    - Skip tests if MongoDB not installed
+    - Use estimated_document_count to replace deprecated count()
+    - Add `bson_codec    => BSON->new( prefer_numeric => 1, ),` to MongoDB::MongoClient->new()
+    - No longer need OID
 
 0.0.6 2017-10-10T09:02:54Z
     - Use the 'count' method from MongoDB::Collection
