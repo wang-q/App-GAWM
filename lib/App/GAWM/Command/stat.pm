@@ -148,7 +148,7 @@ sub execute {
 
         #@type MongoDB::Collection
         my $coll = $db->get_collection('gsw');
-        my $exists = $coll->count( { "gc.cv" => { '$exists' => 1 } } );
+        my $exists = $coll->count_documents( { "gc.cv" => { '$exists' => 1 } } );
         if ( !$exists ) {
             print "    gsw.gc.cv doesn't exist\n";
             print "    Skip sheet $sheet_name\n";
@@ -202,7 +202,7 @@ sub execute {
 
         #@type MongoDB::Collection
         my $coll = $db->get_collection('gsw');
-        my $exists = $coll->count( { 'gc.cv' => { '$exists' => 1 } } );
+        my $exists = $coll->count_documents( { 'gc.cv' => { '$exists' => 1 } } );
         if ( !$exists ) {
             print "    gsw.gc.cv doesn't exist\n";
             print "    Skip sheet $sheet_name\n";
@@ -256,7 +256,7 @@ sub execute {
 
         #@type MongoDB::Collection
         my $coll = $db->get_collection('gsw');
-        my $exists = $coll->count( { 'gc.cv' => { '$exists' => 1 } } );
+        my $exists = $coll->count_documents( { 'gc.cv' => { '$exists' => 1 } } );
         if ( !$exists ) {
             print "    gsw.gc.cv doesn't exist\n";
             print "    Skip sheet $sheet_name\n";
@@ -344,7 +344,7 @@ sub execute {
 
         #@type MongoDB::Collection
         my $coll = $db->get_collection('ofgsw');
-        my $exists = $coll->count( { 'gc.cv' => { '$exists' => 1 } } );
+        my $exists = $coll->count_documents( { 'gc.cv' => { '$exists' => 1 } } );
         if ( !$exists ) {
             print "    ofgsw.gc.cv doesn't exist\n";
             print "    Skip sheet $sheet_name\n";
@@ -391,7 +391,7 @@ sub execute {
 
         #@type MongoDB::Collection
         my $coll = $db->get_collection('ofgsw');
-        my $exists = $coll->count( { 'gc.cv' => { '$exists' => 1 } } );
+        my $exists = $coll->count_documents( { 'gc.cv' => { '$exists' => 1 } } );
         if ( !$exists ) {
             print "    ofgsw.gc.cv doesn't exist\n";
             print "    Skip sheets ofg_tag_type\n";

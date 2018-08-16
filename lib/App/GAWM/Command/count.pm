@@ -313,7 +313,7 @@ sub count_pos_in_sw {
     my $align_id = shift;
     my $sw       = shift;
 
-    my $count = $coll->count(
+    my $count = $coll->count_documents(
         {   'align._id' => $align_id,
             '$or'       => [
 
