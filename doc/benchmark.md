@@ -15,7 +15,7 @@ rm ~/share/mongodb26/data/mongod.lock
 rm ~/share/mongodb30/data/mongod.lock
 ~/share/mongodb30/bin/mongod --config ~/share/mongodb30/mongod.cnf
 
-# mongodb34
+# mongodb40
 rm ~/share/mongodb/data/mongod.lock
 ~/share/mongodb/bin/mongod --config ~/share/mongodb/mongod.cnf
 ```
@@ -92,22 +92,21 @@ unset GAWM_PARALLEL
 
 ## Results
 
-* 4 threads: macOS 10.11, i7-6700k, 32G, SSD
-* 4 threads: macOS 10.13, MBP mid 2014, i7 2.2G
+* 4 threads: macOS 10.13, i7-6700k, 32G, SSD
 
-    |        |   step   |  2.6.12 |  3.0.14 |   3.4.1 |   3.6.3 | 3.6.3 (MBP) |
-    |:------:|:--------:|--------:|--------:|--------:|--------:|------------:|
-    | gcwave |   gen    |     9'' |     9'' |    13'' |    15'' |        18'' |
-    |        |  gcwave  | 10'52'' | 10'53'' | 10'38'' | 11'17'' |     14'16'' |
-    |        |   dump   |     1'' |     3'' |     8'' |     3'' |         4'' |
-    |        |   swcv   | 41'19'' | 40'55'' | 41'10'' | 40'30'' |     53'50'' |
-    |        |   stat   |         |    12'' |    10'' |    11'' |        16'' |
-    | ofgsw  | position |  5'16'' |  4'58'' |  4'50'' |  4'41'' |      6'24'' |
-    |        |   stat   |    21'' |    27'' |    22'' |    26'' |        39'' |
-    | count  | restore  |    49'' |    33'' |    30'' |    34'' |        45'' |
-    |        |  insert  |    54'' |    58'' |    56'' |    51'' |       1'1'' |
-    |        |  count   |  1'56'' |  1'56'' |  1'56'' |  1'38'' |      2'39'' |
-    |        |   stat   |     8'' |    11'' |     9'' |    10'' |        17'' |
+    |        |   step   |  2.6.12 |  3.0.14 |   3.4.1 |   4.0.1 |
+    |:------:|:--------:|--------:|--------:|--------:|--------:|
+    | gcwave |   gen    |     9'' |     9'' |    13'' |    12'' |
+    |        |  gcwave  | 10'52'' | 10'53'' | 10'38'' | 10'52'' |
+    |        |   dump   |     1'' |     3'' |     8'' |     3'' |
+    |        |   swcv   | 41'19'' | 40'55'' | 41'10'' | 40'50'' |
+    |        |   stat   |         |    12'' |    10'' |    11'' |
+    | ofgsw  | position |  5'16'' |  4'58'' |  4'50'' |  5'22'' |
+    |        |   stat   |    21'' |    27'' |    22'' |    26'' |
+    | count  | restore  |    49'' |    33'' |    30'' |    32'' |
+    |        |  insert  |    54'' |    58'' |    56'' |  1'36'' |
+    |        |  count   |  1'56'' |  1'56'' |  1'56'' |  1'51'' |
+    |        |   stat   |     8'' |    11'' |     9'' |    10'' |
 
 * 12 threads: Ubuntu 14.04, E5-2690 v3 x 2, 128G, HDD
 
@@ -131,7 +130,7 @@ unset GAWM_PARALLEL
 
         ```
         $ du -hs ~/share/mongodb*
-        1.9G	/Users/wangq/share/mongodb
+        1.5G	/Users/wangq/share/mongodb
          11G	/Users/wangq/share/mongodb26
         1.9G	/Users/wangq/share/mongodb30
         ```
