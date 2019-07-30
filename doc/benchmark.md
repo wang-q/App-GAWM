@@ -6,7 +6,7 @@ Install MongoDB by following
 [this script](https://github.com/egateam/egavm/blob/master/prepare/standalone/4-mongodb.sh) and its
 companions.
 
-```shell script
+```bash
 # mongodb26
 rm ~/share/mongodb26/data/mongod.lock
 ~/share/mongodb26/bin/mongod --config ~/share/mongodb26/mongod.cnf
@@ -24,7 +24,7 @@ MongoDB 3.0.7 has a bug on `mongorestore`. Don't use this version.
 
 ## Command lines of tests
 
-```shell script
+```bash
 # need a working MongoDB to pass tests
 cpanm https://github.com/wang-q/App-GAWM.git
 
