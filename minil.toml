@@ -2,4 +2,4 @@ name = "App-GAWM"
 badges = ['travis', 'codecov', 'metacpan']
 authority="cpan:WANGQ"
 
-module_maker="ExtUtilsMakeMaker"
+module_maker="ModuleBuildTiny"
