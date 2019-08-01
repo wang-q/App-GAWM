@@ -2,6 +2,8 @@ Revision history for Perl extension App-GAWM
 
 {{$NEXT}}
 
+    - `dist: trusty` in .travis.yml
+
 0.0.7 2018-08-16T12:52:55Z
     - MongoDB 4.0.1
     - MongoDB Perl Driver 2.0.1
